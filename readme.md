@@ -1,4 +1,4 @@
-![aws-iam-policies](https://cdn.worldvectorlogo.com/logos/aws-iam.svg)
+![aws-iam-policies](https://s3-us-west-1.amazonaws.com/www.jcolemorrison.com/blog/posts/iam-nutshells-3-22-2017/post-head-white.png)
 
 # Collection of useful AWS IAM Resources & Policies
 
