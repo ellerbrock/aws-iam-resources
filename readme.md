@@ -13,6 +13,7 @@
 - [S3 Bucket Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html)
 - [Create Policy Alerts](https://docs.oracle.com/en/cloud/paas/casb-cloud/palug/creating-policy-alerts-aws.html#GUID-00652FEE-A065-4D7B-94A9-9FDAC0E90C1E)
 - [IAM Slack Notification](https://github.com/Signiant/aws-iam-slack-notifer)
+- [Envelope Encryption](https://docs.aws.amazon.com/kms/latest/developerguide/workflow.html)
 
 ## Policies
 
