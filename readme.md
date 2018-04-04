@@ -16,66 +16,140 @@
 
 ## Policies
 
-#### Allow User to change his Settings
+### S3 Bucket Policy to Only Allow Encrypted Object Uploads
 
 ```
 {
     "Version": "2012-10-17",
+    "Id": "PutObjPolicy",
     "Statement": [
         {
-            "Effect": "Allow",
-            "Action": [
-                "iam:ChangePassword",
-                "iam:DeleteSSHPublicKey",
-                "iam:GetSSHPublicKey",
-                "iam:ListSSHPublicKeys",
-                "iam:UpdateSSHPublicKey",
-                "iam:UploadSSHPublicKey",
-                "iam:CreateServiceSpecificCredential",
-                "iam:ListServiceSpecificCredentials",
-                "iam:UpdateServiceSpecificCredential",
-                "iam:DeleteServiceSpecificCredential",
-                "iam:ResetServiceSpecificCredential"
-            ],
-            "Resource": "arn:aws:iam::*:user/${aws:username}"
+            "Sid": "DenyUnEncryptedObjectUploads",
+            "Effect": "Deny",
+            "Principal": {
+                "AWS": "*"
+            },
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::your-test-storage-bucket/*",
+            "Condition": {
+                "StringNotEquals": {
+                    "s3:x-amz-server-side-encryption": [
+                        "AES256",
+                        "aws:kms"
+                    ]
+                }
+            }
         },
         {
-            "Effect": "Allow",
-            "Action": [
-                "iam:GetAccountPasswordPolicy"
-            ],
-            "Resource": "*"
+            "Sid": "DenyUnEncryptedObjectUploads",
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::your-test-storage-bucket/*",
+            "Condition": {
+                "Null": {
+                    "s3:x-amz-server-side-encryption": "true"
+                }
+            }
         }
     ]
 }
 ```
 
+Source: <https://sanjayvaranasi.wordpress.com/2017/02/07/aws-s3-bucket-policy-to-only-allow-encrypted-object-uploads/>
 
-### Protect our Organization in Billing
+
+### Granting Access After Recent MFA Authentication (GetSessionToken)
 
 ```
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "ProtectOrganization",
-            "Effect": "Deny",
-            "Action": [
-                "organizations:LeaveOrganization",
-                "organizations:DeleteOrganization"
-            ],
-            "Resource": "arn:aws:organizations::01234567890:organization/o-o-xxxxxxx"
-        }
-    ]
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": ["ec2:*"],
+    "Resource": ["*"],
+    "Condition": {"NumericLessThan": {"aws:MultiFactorAuthAge": "3600"}}
+  }]
 }
 ```
 
-### S3 Up
+Source: <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sample-policies.html#ExampleMFAforIAMUserAge>
+
+### Denying Access to Specific APIs Without Valid MFA Authentication (GetSessionToken)
 
 ```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowAllActionsForEC2",
+      "Effect": "Allow",
+      "Action": "ec2:*",
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyStopAndTerminateWhenMFAIsNotPresent",
+      "Effect": "Deny",
+      "Action": [
+        "ec2:StopInstances",
+        "ec2:TerminateInstances"
+      ],
+      "Resource": "*",
+      "Condition": {"BoolIfExists": {"aws:MultiFactorAuthPresent": false}}
+    }
+  ]
+}
 ```
+
+Source: <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sample-policies.html#ExampleMFAforResource>
+
+
+### Denying Access to Specific APIs Without Recent Valid MFA Authentication (GetSessionToken)
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowAllActionsForEC2",
+      "Effect": "Allow",
+      "Action": "ec2:*",
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyStopAndTerminateWhenMFAIsNotPresent",
+      "Effect": "Deny",
+      "Action": [
+        "ec2:StopInstances",
+        "ec2:TerminateInstances"
+      ],
+      "Resource": "*",
+      "Condition": {"BoolIfExists": {"aws:MultiFactorAuthPresent": false}}
+    },
+    {
+      "Sid": "DenyStopAndTerminateWhenMFAIsOlderThanOneHour",
+      "Effect": "Deny",
+      "Action": [
+        "ec2:StopInstances",
+        "ec2:TerminateInstances"
+      ],
+      "Resource": "*",
+      "Condition": {"NumericGreaterThanIfExists": {"aws:MultiFactorAuthAge": "3600"}}
+    }
+  ]
+}
+```
+
+Source: <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sample-policies.html#ExampleMFADenyNotRecent>
+
+
+<!--
 
 ### 
 
 ```
 ```
+
+Source: <>
+
+-->
