@@ -9,7 +9,6 @@
 - [AWS Identity and Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)
 - [Variables for Policies](https://docs.aws.amazon.com/de_de/IAM/latest/UserGuide/reference_policies_variables.html)
 - [MFA API Protection](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_configure-api-require.html)
-- [MFA S3 Access](https://aws.amazon.com/de/preumiumsupport/knowledge-center/enforce-mfa-other-account-access-bucket/)
 - [MFA S3 Delete](https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html#MultiFactorAuthenticationDelete)
 - [S3 Bucket Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html)
 - [Create Policy Alerts](https://docs.oracle.com/en/cloud/paas/casb-cloud/palug/creating-policy-alerts-aws.html#GUID-00652FEE-A065-4D7B-94A9-9FDAC0E90C1E)
