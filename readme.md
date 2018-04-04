@@ -20,43 +20,38 @@
 
 ```
 {
-    "Version": "2012-10-17",
-    "Id": "PutObjPolicy",
-    "Statement": [
-        {
-            "Sid": "DenyUnEncryptedObjectUploads",
-            "Effect": "Deny",
-            "Principal": {
-                "AWS": "*"
-            },
-            "Action": "s3:PutObject",
-            "Resource": "arn:aws:s3:::your-test-storage-bucket/*",
-            "Condition": {
-                "StringNotEquals": {
-                    "s3:x-amz-server-side-encryption": [
-                        "AES256",
-                        "aws:kms"
-                    ]
+     "Version": "2012-10-17",
+     "Id": "PutObjPolicy",
+     "Statement": [
+           {
+                "Sid": "DenyIncorrectEncryptionHeader",
+                "Effect": "Deny",
+                "Principal": "*",
+                "Action": "s3:PutObject",
+                "Resource": "arn:aws:s3:::<bucket_name>/*",
+                "Condition": {
+                        "StringNotEquals": {
+                               "s3:x-amz-server-side-encryption": "AES256"
+                         }
                 }
-            }
-        },
-        {
-            "Sid": "DenyUnEncryptedObjectUploads",
-            "Effect": "Deny",
-            "Principal": "*",
-            "Action": "s3:PutObject",
-            "Resource": "arn:aws:s3:::your-test-storage-bucket/*",
-            "Condition": {
-                "Null": {
-                    "s3:x-amz-server-side-encryption": "true"
-                }
-            }
-        }
-    ]
-}
+           },
+           {
+                "Sid": "DenyUnEncryptedObjectUploads",
+                "Effect": "Deny",
+                "Principal": "*",
+                "Action": "s3:PutObject",
+                "Resource": "arn:aws:s3:::<bucket_name>/*",
+                "Condition": {
+                        "Null": {
+                               "s3:x-amz-server-side-encryption": true
+                        }
+               }
+           }
+     ]
+ }
 ```
 
-Source: <https://sanjayvaranasi.wordpress.com/2017/02/07/aws-s3-bucket-policy-to-only-allow-encrypted-object-uploads/>
+Source: <https://aws.amazon.com/de/blogs/security/how-to-prevent-uploads-of-unencrypted-objects-to-amazon-s3/>
 
 
 ### Granting Access After Recent MFA Authentication (GetSessionToken)
