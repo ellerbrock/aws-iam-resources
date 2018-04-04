@@ -1,6 +1,6 @@
 ![aws-iam-policies](https://s3-us-west-1.amazonaws.com/www.jcolemorrison.com/blog/posts/iam-nutshells-3-22-2017/post-head-white.png)
 
-# Collection of useful AWS IAM Resources & Policies
+# Collection of useful AWS IAM Resources & Policies [![Build Status](https://travis-ci.org/ellerbrock/aws-iam-resources.svg?branch=master)](https://travis-ci.org/ellerbrock/aws-iam-resources)
 
 ## Links
 
