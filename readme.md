@@ -11,7 +11,7 @@
 - [MFA API Protection](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_configure-api-require.html)
 - [MFA S3 Delete](https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html#MultiFactorAuthenticationDelete)
 - [S3 Bucket Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html)
-- [Create Policy Alerts](https://docs.oracle.com/en/cloud/paas/casb-cloud/palug/creating-policy-alerts-aws.html#GUID-00652FEE-A065-4D7B-94A9-9FDAC0E90C1E)
+- [Create Policy Alerts](https://docs.oracle.com/en/cloud/paas/casb-cloud/palug/creating-policies-and-managing-policy-alerts.html)
 - [IAM Slack Notification](https://github.com/Signiant/aws-iam-slack-notifer)
 - [Envelope Encryption](https://docs.aws.amazon.com/kms/latest/developerguide/workflow.html)
 
