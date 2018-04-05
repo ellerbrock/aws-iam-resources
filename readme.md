@@ -7,12 +7,13 @@
 - [IAM Policy Simulator](https://policysim.aws.amazon.com/home/index.jsp)
 - [Policy Generator](https://awspolicygen.s3.amazonaws.com/policygen.html)
 - [AWS Identity and Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)
-- [Variables for Policies](https://docs.aws.amazon.com/de_de/IAM/latest/UserGuide/reference_policies_variables.html)
+- [Policies Variables](https://docs.aws.amazon.com/de_de/IAM/latest/UserGuide/reference_policies_variables.html)
 - [MFA API Protection](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_configure-api-require.html)
 - [MFA S3 Delete](https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html#MultiFactorAuthenticationDelete)
 - [S3 Bucket Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html)
 - [IAM Slack Notification](https://github.com/Signiant/aws-iam-slack-notifer)
 - [Envelope Encryption](https://docs.aws.amazon.com/kms/latest/developerguide/workflow.html)
+- [Security Token Service](https://docs.aws.amazon.com/STS/latest/APIReference/Welcome.html)
 
 ## Policies
 
@@ -136,6 +137,33 @@ Source: <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sam
 ```
 
 Source: <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sample-policies.html#ExampleMFADenyNotRecent>
+
+
+### Granting an IAM User Permission to Pass an IAM Role to an Instance
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+         "ec2:RunInstances",
+         "ec2:AssociateIamInstanceProfile",
+         "ec2:ReplaceIamInstanceProfileAssociation"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+Source: <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#permission-to-pass-iam-roles>
 
 
 <!--
