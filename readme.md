@@ -166,6 +166,28 @@ Source: <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sam
 Source: <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#permission-to-pass-iam-roles>
 
 
+### Denying Using a STS Rolle Without Valid MFA Authentication
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::<ACCOUNT_ID>:<USERNAME>"
+      },
+      "Action": "sts:AssumeRole",
+      "Condition": {
+        "Bool": {
+          "aws:MultiFactorAuthPresent": "true"
+        }
+      }
+    }
+  ]
+}
+```
+
 <!--
 
 ### 
