@@ -188,6 +188,31 @@ Source: <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazo
 }
 ```
 
+
+### IP restriction but allow User to switch Role
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Deny",
+            "NotAction": "sts:AssumeRole",
+            "Resource": "*",
+            "Condition": {
+                "NotIpAddress": {
+                     "aws:SourceIp": [
+                         "123.123.123.123/24"
+                     ]
+                }
+             }
+         }
+     ]
+}
+```
+
+Source: <https://aws.amazon.com/premiumsupport/knowledge-center/source-ip-switch-role/>
+
 <!--
 
 ### 
