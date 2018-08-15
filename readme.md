@@ -213,6 +213,31 @@ Source: <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazo
 
 Source: <https://aws.amazon.com/premiumsupport/knowledge-center/source-ip-switch-role/>
 
+
+### Denies Access to AWS Based on the Source IP
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": {
+        "Effect": "Deny",
+        "Action": "*",
+        "Resource": "*",
+        "Condition": {
+            "NotIpAddress": {
+                "aws:SourceIp": [
+                    "192.0.2.0/24",
+                    "203.0.113.0/24"
+                ]
+            }
+        }
+    }
+}
+```
+
+Source: <https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws_deny-ip.html>
+
+
 <!--
 
 ### 
