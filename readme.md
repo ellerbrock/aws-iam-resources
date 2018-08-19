@@ -266,6 +266,40 @@ Source: <https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_exa
 Source: <https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies-vpc-endpoint.html>
 
 
+
+### Limit KMS Key Usage for defined Services only
+
+*In this example allow KMS usage only for EBS and RDS.*
+
+```json
+{
+  "Effect": "Allow",
+  "Principal": {
+    "AWS": "arn:aws:iam::111122223333:user/ExampleUser"
+  },
+  "Action": [
+    "kms:Encrypt",
+    "kms:Decrypt",
+    "kms:ReEncrypt*",
+    "kms:GenerateDataKey*",
+    "kms:CreateGrant",
+    "kms:ListGrants",
+    "kms:DescribeKey"
+  ],
+  "Resource": "*",
+  "Condition": {
+    "StringEquals": {
+      "kms:ViaService": [
+        "ec2.us-west-2.amazonaws.com",
+        "rds.us-west-2.amazonaws.com"
+      ]
+    }
+  }
+}
+```
+
+Source: <https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-via-service>
+
 <!--
 
 ### 
