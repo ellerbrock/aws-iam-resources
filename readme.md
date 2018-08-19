@@ -19,7 +19,7 @@
 
 ### S3 Bucket Policy to Only Allow Encrypted Object Uploads
 
-```
+```json
 {
      "Version": "2012-10-17",
      "Id": "PutObjPolicy",
@@ -57,7 +57,7 @@ Source: <https://aws.amazon.com/de/blogs/security/how-to-prevent-uploads-of-unen
 
 ### Granting Access After Recent MFA Authentication (GetSessionToken)
 
-```
+```json
 {
   "Version": "2012-10-17",
   "Statement": [{
@@ -71,9 +71,10 @@ Source: <https://aws.amazon.com/de/blogs/security/how-to-prevent-uploads-of-unen
 
 Source: <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sample-policies.html#ExampleMFAforIAMUserAge>
 
+
 ### Denying Access to Specific APIs Without Valid MFA Authentication (GetSessionToken)
 
-```
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -102,7 +103,7 @@ Source: <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sam
 
 ### Denying Access to Specific APIs Without Recent Valid MFA Authentication (GetSessionToken)
 
-```
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -141,7 +142,7 @@ Source: <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sam
 
 ### Granting an IAM User Permission to Pass an IAM Role to an Instance
 
-```
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -168,7 +169,7 @@ Source: <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazo
 
 ### Denying Using a STS Rolle Without Valid MFA Authentication
 
-```
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -191,7 +192,7 @@ Source: <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazo
 
 ### IP restriction but allow User to switch Role
 
-```
+```json
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -216,7 +217,7 @@ Source: <https://aws.amazon.com/premiumsupport/knowledge-center/source-ip-switch
 
 ### Denies Access to AWS Based on the Source IP
 
-```
+```json
 {
     "Version": "2012-10-17",
     "Statement": {
@@ -240,7 +241,7 @@ Source: <https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_exa
 
 ### S3 Restricting Access to a Specific VPC Endpoint
 
-```
+```json
 {
    "Version": "2012-10-17",
    "Id": "Policy1415115909152",
@@ -269,7 +270,7 @@ Source: <https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies
 
 ### 
 
-```
+```json
 ```
 
 Source: <>
