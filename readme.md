@@ -212,8 +212,6 @@ Source: <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazo
 }
 ```
 
-Source: <https://aws.amazon.com/premiumsupport/knowledge-center/source-ip-switch-role/>
-
 
 ### Denies Access to AWS Based on the Source IP
 
