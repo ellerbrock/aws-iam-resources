@@ -237,30 +237,6 @@ Source: <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazo
 Source: <https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws_deny-ip.html>
 
 
-### S3 Restricting Access to a Specific VPC Endpoint
-
-```json
-{
-   "Version": "2012-10-17",
-   "Id": "Policy1415115909152",
-   "Statement": [
-     {
-       "Sid": "Access-to-specific-VPCE-only",
-       "Principal": "*",
-       "Action": "s3:*",
-       "Effect": "Deny",
-       "Resource": ["arn:aws:s3:::examplebucket",
-                    "arn:aws:s3:::examplebucket/*"],
-       "Condition": {
-         "StringNotEquals": {
-           "aws:sourceVpce": "vpce-1a2b3c4d"
-         }
-       }
-     }
-   ]
-}
-```
-
 Source: <https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies-vpc-endpoint.html>
 
 
