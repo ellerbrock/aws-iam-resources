@@ -364,6 +364,39 @@ Source: <https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions
 
 Source: <https://docs.aws.amazon.com/servicecatalog/latest/adminguide/getstarted-iamenduser.html>
 
+### Limit Pushes and Merges to Branches in AWS CodeCommit
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Deny",
+            "Action": [
+                "codecommit:GitPush",
+                "codecommit:DeleteBranch",
+                "codecommit:PutFile",
+                "codecommit:MergePullRequestByFastForward"
+            ],
+            "Resource": "arn:aws:codecommit:us-east-2:80398EXAMPLE:MyDemoRepo",
+            "Condition": {
+                "StringEqualsIfExists": {
+                    "codecommit:References": [
+                        "refs/heads/master", 
+                        "refs/heads/prod"
+                     ]
+                },
+                "Null": {
+                    "codecommit:References": false
+                }
+            }
+        }
+    ]
+}
+```
+
+Source: <https://docs.aws.amazon.com/codecommit/latest/userguide/how-to-conditional-branch.html>
+
 
 <!--
 
