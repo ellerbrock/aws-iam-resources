@@ -17,6 +17,27 @@
 
 ## Policies
 
+### S3 Only Allow Access from Users / Role
+
+```json
+{
+     "Sid": "ListRelevantDirectories20150907",
+     "Effect": "Deny",
+     "NotPrincipal": {
+          "AWS": [
+               "arn:aws:iam::<ACCOUNT_ID>:role/CredMgr",
+               "arn:aws:sts::<ACCOUNT_ID>:assumed-role/CredMgr/Mgr1"
+          ]
+     },
+     "Action": [
+          "s3:ListBucket"
+     ],
+     "Resource": "arn:aws:s3:::CredentialBucket"
+}
+```
+
+Source: <https://aws.amazon.com/blogs/security/how-to-create-a-policy-that-whitelists-access-to-sensitive-amazon-s3-buckets/<Paste>>
+
 ### S3 Bucket Policy to Only Allow Encrypted Object Uploads
 
 ```json
