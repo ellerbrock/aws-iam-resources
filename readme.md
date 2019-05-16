@@ -21,22 +21,24 @@
 
 ```json
 {
-     "Sid": "ListRelevantDirectories20150907",
-     "Effect": "Deny",
-     "NotPrincipal": {
-          "AWS": [
-               "arn:aws:iam::<ACCOUNT_ID>:role/CredMgr",
-               "arn:aws:sts::<ACCOUNT_ID>:assumed-role/CredMgr/Mgr1"
-          ]
-     },
-     "Action": [
-          "s3:ListBucket"
-     ],
-     "Resource": "arn:aws:s3:::CredentialBucket"
+    "Version": "2012-10-17",
+    "Statement": [{
+        "Effect": "Deny",
+        "NotPrincipal": {"AWS": [
+            "arn:aws:sts::444455556666:assumed-role/cross-account-read-only-role/cross-account-audit-app",
+            "arn:aws:iam::444455556666:role/cross-account-read-only-role",
+            "arn:aws:iam::444455556666:root"
+        ]},
+        "Action": "s3:*",
+        "Resource": [
+            "arn:aws:s3:::Bucket_AccountAudit",
+            "arn:aws:s3:::Bucket_AccountAudit/*"
+        ]
+    }]
 }
 ```
 
-Source: <https://aws.amazon.com/blogs/security/how-to-create-a-policy-that-whitelists-access-to-sensitive-amazon-s3-buckets/>
+Source: <https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_notprincipal.html#specifying-notprincipal>
 
 ### S3 Bucket Policy to Only Allow Encrypted Object Uploads
 
