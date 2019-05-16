@@ -36,7 +36,7 @@
 }
 ```
 
-Source: <https://aws.amazon.com/blogs/security/how-to-create-a-policy-that-whitelists-access-to-sensitive-amazon-s3-buckets/<Paste>>
+Source: <https://aws.amazon.com/blogs/security/how-to-create-a-policy-that-whitelists-access-to-sensitive-amazon-s3-buckets/>
 
 ### S3 Bucket Policy to Only Allow Encrypted Object Uploads
 
