@@ -76,6 +76,59 @@ Source: <https://aws.amazon.com/blogs/security/how-to-create-a-policy-that-white
 Source: <https://aws.amazon.com/de/blogs/security/how-to-prevent-uploads-of-unencrypted-objects-to-amazon-s3/>
 
 
+### Restrict S3 Bucket Access from VPC Endpoint
+
+```json
+{
+   "Version": "2012-10-17",
+   "Id": "Policy1415115909152",
+   "Statement": [
+     {
+       "Sid": "Access-to-specific-VPCE-only",
+       "Principal": "*",
+       "Action": "s3:*",
+       "Effect": "Deny",
+       "Resource": ["arn:aws:s3:::examplebucket",
+                    "arn:aws:s3:::examplebucket/*"],
+       "Condition": {
+         "StringNotEquals": {
+           "aws:sourceVpce": "vpce-1a2b3c4d"
+         }
+       }
+     }
+   ]
+}
+```
+
+Source: <https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies-vpc-endpoint.html#example-bucket-policies-restrict-accesss-vpc-endpoint>
+
+
+### Restrict S3 Bucket Access from VPC
+
+```json
+{
+   "Version": "2012-10-17",
+   "Id": "Policy1415115909153",
+   "Statement": [
+     {
+       "Sid": "Access-to-specific-VPC-only",
+       "Principal": "*",
+       "Action": "s3:*",
+       "Effect": "Deny",
+       "Resource": ["arn:aws:s3:::examplebucket",
+                    "arn:aws:s3:::examplebucket/*"],
+       "Condition": {
+         "StringNotEquals": {
+           "aws:sourceVpc": "vpc-111bbb22"
+         }
+       }
+     }
+   ]
+}
+```
+
+Source: <https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies-vpc-endpoint.html#example-bucket-policies-restrict-access-vpc>
+
 ### Granting Access After Recent MFA Authentication (GetSessionToken)
 
 ```json
@@ -258,10 +311,6 @@ Source: <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazo
 Source: <https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws_deny-ip.html>
 
 
-Source: <https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies-vpc-endpoint.html>
-
-
-
 ### Limit KMS Key Usage for defined Services only
 
 *In this example allow KMS usage only for EBS and RDS.*
@@ -296,58 +345,24 @@ Source: <https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies
 Source: <https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-via-service>
 
 
-### Restrict S3 Bucket Access from VPC Endpoint
+### Grant Permissions to AWS Service Catalog End Users
 
 ```json
 {
-   "Version": "2012-10-17",
-   "Id": "Policy1415115909152",
-   "Statement": [
-     {
-       "Sid": "Access-to-specific-VPCE-only",
-       "Principal": "*",
-       "Action": "s3:*",
-       "Effect": "Deny",
-       "Resource": ["arn:aws:s3:::examplebucket",
-                    "arn:aws:s3:::examplebucket/*"],
-       "Condition": {
-         "StringNotEquals": {
-           "aws:sourceVpce": "vpce-1a2b3c4d"
-         }
-       }
-     }
-   ]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "servicecatalog:ProvisionProduct"
+            ],
+            "Resource": "*"
+        }
+    ]
 }
 ```
 
-Source: <https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies-vpc-endpoint.html#example-bucket-policies-restrict-accesss-vpc-endpoint>
-
-
-### Restrict S3 Bucket Access from VPC
-
-```json
-{
-   "Version": "2012-10-17",
-   "Id": "Policy1415115909153",
-   "Statement": [
-     {
-       "Sid": "Access-to-specific-VPC-only",
-       "Principal": "*",
-       "Action": "s3:*",
-       "Effect": "Deny",
-       "Resource": ["arn:aws:s3:::examplebucket",
-                    "arn:aws:s3:::examplebucket/*"],
-       "Condition": {
-         "StringNotEquals": {
-           "aws:sourceVpc": "vpc-111bbb22"
-         }
-       }
-     }
-   ]
-}
-```
-
-Source: <https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies-vpc-endpoint.html#example-bucket-policies-restrict-access-vpc>
+Source: <https://docs.aws.amazon.com/servicecatalog/latest/adminguide/getstarted-iamenduser.html>
 
 
 <!--
